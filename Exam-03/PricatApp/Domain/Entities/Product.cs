@@ -1,32 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using Domain.Common;
+using Pricat.Domain.Common;
 
-namespace Domain.Entities
+
+namespace Pricat.Domain.Entities
 {
     public class Product : EntityBase
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public int CategoryId { get; set; }
-
         [Required]
+        [MaxLength(13)]
+        [DataType(DataType.Text)]
         public string EanCode { get; set; }
-
         [Required]
+        [MaxLength(50)]
+        [DataType(DataType.Text)]
         public string Description { get; set; }
-
         [Required]
+        [MaxLength(20)]
+        [DataType(DataType.Text)]
         public string Unit { get; set; }
-
         [Required]
-        public decimal Price { get; set; }
+        [Range(0, float.MaxValue)]
+        public int Price { get; set; }
 
 
     }

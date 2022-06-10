@@ -1,5 +1,5 @@
-CREATE TABLE `pricatdb`.`categories` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `Description` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`Id`));
+CREATE TABLE pricatdb.categories (
+  Id INT NOT NULL,
+  Description VARCHAR(50) NOT NULL,
+  PRIMARY KEY (Id));
 

@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using Domain.Common;
+using Pricat.Domain.Common;
 
-namespace Domain.Entities
+namespace Pricat.Domain.Entities
 {
     public class Category : EntityBase
     {
 
-        [Key]
-        public int Id { get; set; }
-
         [Required]
+        [MaxLength(50)]
+        [DataType(DataType.Text)]
         public string Description { get; set; }
 
     }
+
 }

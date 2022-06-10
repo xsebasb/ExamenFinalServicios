@@ -1,32 +1,29 @@
-﻿using Domain.Entities;
-using Domain.Interfaces.Repositories;
-using Infrastructure.Common;
-using Infrastructure.Context;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Pricat.Domain.Entities;
+using Pricat.Domain.Interfaces.Repositories;
+using Pricat.Infrastructure.Common;
+using Pricat.Infrastructure.Context;
 
-namespace Infrastructure.Repositories
+namespace Pricat.Infrastructure.Repositories
 {
     public class ProductRepository : Repository<Product>, IProductRepository
     {
-        private readonly AppDbContext _appDbContext;
         public ProductRepository(AppDbContext appDbContext) : base(appDbContext)
         {
-            _appDbContext = appDbContext;
         }
-        public async Task DeleteAllByCategoryId(int id)
+        public async Task<IEnumerable<Product>> GetAllByCategoryIdAsync(int categoryId)
         {
-            var products = _appDbContext.Products.Where(aux => aux.CategoryId == id).ToList();
-            foreach (var item in products)
-            {
-                _appDbContext.Remove(item);
-                await _appDbContext.SaveChangesAsync();
-            }
+            return await FindAsync(p => p.CategoryId == categoryId);
         }
-        public Task<List<Product>> GetAllBycategoryId(int id)
+
+        public async Task RemoveAllByCategoryIdAsync(int categoryId)
         {
-            return Task.FromResult(_appDbContext.Products.Where(aux => aux.CategoryId == id).ToList());
+            var productsToRemove = await GetAllByCategoryIdAsync(categoryId);
+            await RemoveRangeAsync(productsToRemove);
         }
     }
 }

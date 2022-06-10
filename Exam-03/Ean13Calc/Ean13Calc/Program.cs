@@ -31,9 +31,8 @@ namespace Ean13Calc
                GenerateEan13Numbers(nNumbers, args[2], args[3]);
                return;
             }
-
-
             Usage();
+            GenerateEan13Numbers(3);
 
          }
          catch (Exception ex)
